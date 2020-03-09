@@ -1,7 +1,7 @@
 name: Test building a simple C project
 on:
     push:
-        - branches:
+        branches:
             master
     jobs:
         build:
