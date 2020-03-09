@@ -3,24 +3,24 @@ on:
     push:
         branches:
             master
-    jobs:
-        build:
-            name: Build
-            
-            strategy:
-                matrix:
-                    runs-on: [ubuntu-latest, macOS-latest]
+jobs:
+    build:
+        name: Build
+        
+        strategy:
+            matrix:
+                runs-on: [ubuntu-latest, macOS-latest]
 
-            runs-on: ${{ matrix.runs-on }}
+        runs-on: ${{ matrix.runs-on }}
 
-            steps:
-                - name: Checkout
-                  uses: actions/checkout@v2
-                - name: Compile with GCC
-                  if: matrix.runs-on == 'ubuntu-latest'
-                  run: make main
-                - name: Compile with Clang
-                  if: matrix.runs-on == 'macOS-latest'
-                  run: make main CC=clang
-                - name: Test
-                  run: make test
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        - name: Compile with GCC
+          if: matrix.runs-on == 'ubuntu-latest'
+          run: make main
+        - name: Compile with Clang
+          if: matrix.runs-on == 'macOS-latest'
+          run: make main CC=clang
+        - name: Test
+          run: make test
